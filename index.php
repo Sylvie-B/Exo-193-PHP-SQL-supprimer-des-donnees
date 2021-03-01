@@ -11,3 +11,43 @@
  *    --> Et pour finir, comme vous n'avez plus de table dans la base de données, vous décidez de supprimer aussi la base de données.
  */
 
+require './Classes/DB.php';
+
+$db = DB::getInstance();
+
+try {
+    $sql = "DELETE FROM user WHERE id = 4";
+    if($db->exec($sql) !== false){
+        echo "entrée supprimée";
+    }
+
+    $sql2 = "TRUNCATE TABLE user";
+
+    if($db->exec($sql2) !== false){
+        echo "contenu de la table supprimé";
+    }
+
+    $sql3 = "
+        INSERT INTO user (nom, prenom, rue, numero, code_postal, ville, pays, mail)
+        VALUES ('Doe', 'John', 'de la fontaine', 5, 59610, 'Fourmies', 'France', 'JohnDoe@unknown.fr');
+    ";
+
+        if($db->exec($sql3) !== false){
+        echo "utilisateur ajouté";
+    }
+
+    $sql4 = "DROP TABLE user";
+    if($db->exec($sql4) !== false){
+        echo "table supprimée";
+    }
+
+    $sql5 = "DROP DATABASE table_test_phpmyadmin";
+    if($db->exec($sql5) !== false){
+        echo "base supprimée";
+    }
+
+}
+catch (PDOException $exception) {
+    echo $exception->getMessage();
+}
+

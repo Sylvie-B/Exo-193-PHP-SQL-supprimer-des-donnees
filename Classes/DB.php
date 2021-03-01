@@ -7,11 +7,11 @@
 class DB
 {
     private string $server = 'localhost';
-    private string $db = 'live';
+    private string $db = 'table_test_phpmyadmin';
     private string $user = 'root';
     private string $pwd = '';
-
-    private static PDO $dbInstance;
+// warning "?" and "= null"
+    private static ?PDO $dbInstance = null;
 
     /**
      * DbStatic constructor.
